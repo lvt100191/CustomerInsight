@@ -56,7 +56,7 @@ public class GetFanPage {
     public static void getInfoPage(String username, Date time) throws Exception {
         //lay thong tin user
         Config cfg = new Config();
-        String token = cfg.USER_ACCESS_TOKEN;
+        String token = cfg.USER_ACCESS_TOKEN_THOITRANG;
         JSONParser parser = null;
         String urlMe = "https://graph.facebook.com/" + username + "?access_token=" + token;
         String jsonStr = ResponseUtil.sendGet(urlMe);
