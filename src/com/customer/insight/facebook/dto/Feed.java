@@ -12,19 +12,11 @@ package com.customer.insight.facebook.dto;
  */
 public class Feed {
     private String id;
-    private String type;
     private String createTime;
-    private String content;
     private String message;
     private String story;
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
     
     public String getId() {
         return id;
@@ -34,13 +26,6 @@ public class Feed {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getCreateTime() {
         return createTime;
@@ -65,9 +50,6 @@ public class Feed {
     public void setStory(String story) {
         this.story = story;
     }
-    
-    
-    
-    
+ 
     
 }
