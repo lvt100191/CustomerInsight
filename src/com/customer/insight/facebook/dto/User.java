@@ -14,24 +14,7 @@ import java.util.List;
 public class User {
     private String id;
     private String name;
-    private String birthDay;
-    private List<Feed> listFeed;
 
-    public List<Feed> getListFeed() {
-        return listFeed;
-    }
-
-    public void setListFeed(List<Feed> listFeed) {
-        this.listFeed = listFeed;
-    }
-    
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
     
     public String getId() {
         return id;
