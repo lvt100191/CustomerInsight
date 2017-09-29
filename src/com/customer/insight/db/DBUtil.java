@@ -12,44 +12,20 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
  *
- * @author TUNGLV
+ * @author TUNGLV su dung
+ * https://laptrinh9x.wordpress.com/2017/09/29/cai-dat-va-su-dung-sqlite-manager/
+ * de ket noi db sqlite
  */
 public class DBUtil {
 
     static Logger logger = Logger.getLogger(DBUtil.class.getName());
 
     public static void main(String[] args) throws SQLException {
-        //xoa bang
-        //dropTable("TBL_USER");
-                Connection c = null;
-        Statement stmt = null;
-        try {
-            c = connectDB("tunglv.db");
-
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TBL_USER;");
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String user = rs.getString("username");
-                System.out.println("id = "+id +" user = "+user);
-            }
-            rs.close();
-            stmt.close();
-            c.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        System.out.println("Operation done successfully");
+        connectDB("customer.db");
     }
 
     //tao ket noi den DB
@@ -59,9 +35,9 @@ public class DBUtil {
         try {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:" + fileName);
-            logger.info("ket noi thanh cong");
+            System.out.println("tunglv4 ket noi thanh cong");
         } catch (Exception e) {
-            logger.error("Loi ket noi den co so du lieu");
+            logger.error("tunglv4 Loi ket noi den co so du lieu" + e.getMessage());
             con.close();
         }
         return con;
@@ -80,7 +56,7 @@ public class DBUtil {
                 return true;
             }
         } catch (SQLException ex) {
-            logger.error("loi kiem tra bang du lieu");
+            logger.error("tunglv4 loi kiem tra bang du lieu");
         } finally {
             conn.close();
         }

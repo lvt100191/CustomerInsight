@@ -15,7 +15,7 @@ public class FaceBook {
     String id;
     //id dinh danh tren face: id ca nhan, id trang, id group
     String idFace;
-    //loai tai khoan ca nhan, trang, group
+    //loai tai khoan 1: ca nhan, 2: trang, 3: group
     String type;
     //ten ca nhan, ten trang, ten group
     String name;
