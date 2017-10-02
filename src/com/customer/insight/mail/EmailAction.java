@@ -45,7 +45,7 @@ public class EmailAction {
                 + "Trọng lượng (KG): 0.1\n"
                 + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
                 + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
-        ArrayList<String> lst = null;
+        ArrayList<String> lst = getListMail();
         for (String to : lst) {
             try {
                 sendEmail(from, pwd, to, title, content);
@@ -98,5 +98,9 @@ public class EmailAction {
         } catch (MessagingException e) {
             throw new MessagingException(e.getMessage());
         }
+    }
+    //lay danh sach mail trong DB: TBL_MAIL
+    private static ArrayList<String> getListMail() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

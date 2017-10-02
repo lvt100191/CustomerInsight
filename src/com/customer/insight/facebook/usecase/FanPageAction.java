@@ -6,6 +6,8 @@
 package com.customer.insight.facebook.usecase;
 
 import com.customer.insight.config.Config;
+import com.customer.insight.db.MailDao;
+import com.customer.insight.entity.Mail;
 import com.customer.insight.facebook.dto.Comment;
 import com.customer.insight.facebook.dto.Feed;
 import com.customer.insight.facebook.dto.Page;
@@ -41,7 +43,7 @@ public class FanPageAction {
         Page page = fanPage.getPageInfo(token, username);
         //lay danh sach bai da dang tu ngay truyen vao den hien tai
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date fromDate = sdf.parse("2017-10-01");
+        Date fromDate = sdf.parse("2017-09-28");
         ArrayList<Feed> lstFeed = fanPage.getFeed(token, page.getId(), fromDate);
         //lay danh sach binh luan theo bai dang
         String mail = null;
@@ -62,7 +64,7 @@ public class FanPageAction {
                         String from = "lazada.ohaythe@gmail.com";
                         String pwd = "123456a@";
                         String title = "Chuột quang không dây Forter V189 V111 + Tặng miếng lót chuột  ";
-                        String content = "http://bit.ly/2hyREyh " + "\n"
+                        String content = "CLICK ĐỂ XEM CHI TIẾT VÀ MUA HÀNG: http://bit.ly/2hyREyh " + "\n"
                                 + "Là sản phẩm cách tân vừa ra mắt năm 2014 hỗ trợ một cách hoàn hảo công việc văn phòng của bạn, chuột không dây Forter V189 có thiết kể trẻ trung, trang nhã và độ phân giải cao đến 1500dpi. Điểm nổi bật nhất của sản phẩm là khả năng tự động tắt, bật khi kết nối hoặc shutdown máy tính. Đây sẽ là người bạn hỗ trợ đắc lực cho mọi công việc trên máy tính của bạn. Tiếp nối những tính năng nổi trội của các sản phẩm trước, Forter V189 được cải tiến và nâng cấp đáp ứng nhu cầu làm việc với cường độ và áp lực cao.\n"
                                 + "\n"
                                 + "TÍNH NĂNG NỔI BẬT\n"
@@ -80,7 +82,10 @@ public class FanPageAction {
                                 + "Trọng lượng (KG): 0.1\n"
                                 + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
                                 + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
-                        EmailAction.sendEmail(from, pwd, mail, title, content);
+                        //EmailAction.sendEmail(from, pwd, mail, title, content);
+                        Mail email = new Mail();
+                        email.setEmail(mail);
+                        MailDao.insert(email);
                         }catch(Exception e){
                             
                         }

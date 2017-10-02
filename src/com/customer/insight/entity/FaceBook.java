@@ -5,6 +5,10 @@
  */
 package com.customer.insight.entity;
 
+import java.util.Date;
+
+
+
 /**
  *
  * @author TUNGLV
@@ -30,5 +34,6 @@ public class FaceBook {
     //nhung truong sau nay se them vao ngoai thiet ke co san
     //cac truong ngan cach nhau bang ky tu |
     String note;
+    Date createDate;
     
 }
