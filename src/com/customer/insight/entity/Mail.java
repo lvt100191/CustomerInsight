@@ -9,11 +9,12 @@ import java.util.Date;
 
 /**
  *
- * @author TUNGLV
- * luu thong tin tai khoan mail
+ * @author TUNGLV luu thong tin tai khoan mail
  */
 public class Mail {
+
     public static final String TABLE_NAME = "TBL_MAIL";
+    public static final int STATUS_INSERT = 1;
     //id
     int id;
     //dia chi email
@@ -33,6 +34,25 @@ public class Mail {
     String note;
     //ngay insert vao csdl
     Date createDate;
+    //trang thai email da gui hoac chua gui mail
+    //chu y trang thai nay quy dinh nhu sau:
+    //khi insert set gia tri status=1 la chua gui
+    //gui mail thanh cong set status=2
+    //khi so ban ghi status=2 chiem hau het so luong ban ghi toan bang
+    //gui mail den ban ghi status=2
+    //gui mail thanh cong update status=1
+    //lap nhu vay de gui mail theo lo tranh tinh trang chay chuong trinh lau
+    int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -41,7 +61,6 @@ public class Mail {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getEmail() {
         return email;
@@ -106,7 +125,5 @@ public class Mail {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-    
-    
-  
+
 }

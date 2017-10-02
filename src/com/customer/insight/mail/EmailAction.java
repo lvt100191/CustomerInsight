@@ -27,7 +27,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailAction {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, Exception {
         String from = "lazada.ohaythe@gmail.com";
         String pwd = "123456a@";
         String title = "Chuột quang không dây Forter V189 V111 + Tặng miếng lót chuột  ";
@@ -49,11 +49,18 @@ public class EmailAction {
                 + "Trọng lượng (KG): 0.1\n"
                 + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
                 + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
-        ArrayList<Mail> lst = getListMail();
+
+        String numMail = Config.NUMBER_MAIL;
+        String status = Config.STATUS_MAIL_SEND;
+        String statusUpdate = Config.STATUS_MAIL_UPDATE;
+        ArrayList<Mail> lst = getListMail(status, numMail);
         for (Mail to : lst) {
             try {
                 sendEmail(from, pwd, to.getEmail(), title, content);
                 System.out.println("tunglv gui toi mail" + to + " thanh cong");
+                //update status
+                to.setStatus(Integer.parseInt(statusUpdate));
+                MailDao.updateMail(to);
             } catch (Exception e) {
                 System.out.println("tunglv gui toi mail: " + to + " bi loi" + e.getMessage());
             }
@@ -107,22 +114,32 @@ public class EmailAction {
     //lay danh sach mail trong DB: TBL_MAIL 
     //(gioi han so luong ban ghi lay ve theo cau hinh NUMBER_MAIL)
     //select  *   from TBL_MAIL   limit 5 ;
-    private static ArrayList<Mail> getListMail() throws SQLException {
+    private static ArrayList<Mail> getListMail(String status, String numMail) throws SQLException, Exception {
         ArrayList<Mail> lstMail = null;
-        String numMail = Config.NUMBER_MAIL;
-       lstMail = MailDao.getListMail(numMail);
+        lstMail = MailDao.getListMail(status, numMail);
         return lstMail;
 
     }
 
     //kiem tra tai khoan mail da ton tai chua
     //fasle:chua ton tai true:da ton tai
-    public static boolean checkMailExisted(String mail) throws SQLException {
+    public static boolean checkMailExisted(String mail) throws SQLException, Exception {
         boolean check = false;
         Mail m = MailDao.getByEmail(mail);
         if (m != null) {
             return true;
         }
         return check;
+    }
+
+    private static String updateMail(Mail mail) throws SQLException {
+        String result = "updateMail Success";
+        try {
+            MailDao.updateMail(mail);
+        } catch (Exception e) {
+            result = "updateMail Error";
+        }
+        return result;
+
     }
 }

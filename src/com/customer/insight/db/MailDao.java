@@ -23,7 +23,7 @@ public class MailDao {
 
     static Logger logger = Logger.getLogger(MailDao.class.getName());
 
-    public static void insert(Mail mail) throws SQLException {
+    public static void insert(Mail mail) throws SQLException, Exception {
         Connection c = null;
         PreparedStatement pst = null;
 
@@ -37,8 +37,9 @@ public class MailDao {
                     + "address,"
                     + "mobile,"
                     + "note,"
-                    + "create_date) "
-                    + "VALUES (?,?,?,?,?,?,?);";
+                    + "create_date,"
+                    + "status) "
+                    + "VALUES (?,?,?,?,?,?,?,?);";
             pst = c.prepareStatement(query);
             pst.setString(1, mail.getEmail());
             pst.setString(2, "");
@@ -47,16 +48,17 @@ public class MailDao {
             pst.setString(5, "");
             pst.setString(6, "");
             pst.setDate(7, null);
+            pst.setInt(8, Mail.STATUS_INSERT);
             pst.executeUpdate();
         } catch (Exception e) {
-            logger.error(e);
+            throw new Exception(e.getMessage());
         } finally {
             pst.close();
             c.close();
         }
     }
 
-    public static Mail getByEmail(String email) throws SQLException {
+    public static Mail getByEmail(String email) throws SQLException, Exception {
         Mail m = null;
         Connection c = null;
         PreparedStatement pst = null;
@@ -80,7 +82,7 @@ public class MailDao {
 
             }
         } catch (Exception e) {
-            logger.error(e);
+           throw new Exception(e.getMessage());
         } finally {
             rs.close();
             pst.close();
@@ -89,9 +91,10 @@ public class MailDao {
         return m;
 
     }
-    public static ArrayList<Mail> getListMail(String limit) throws SQLException{
+
+    public static ArrayList<Mail> getListMail(String status, String limit) throws SQLException, Exception {
         ArrayList<Mail> mails = new ArrayList<>();
-                Connection c = null;
+        Connection c = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
@@ -99,27 +102,51 @@ public class MailDao {
             c = DBUtil.connectDB(Config.DB_NAME);
 
             String query = "SELECT * FROM  " + Mail.TABLE_NAME
-                    + " LIMIT ?; ";
+                    + " WHERE STATUS = ? LIMIT ?; ";
             pst = c.prepareStatement(query);
-            pst.setString(1, limit);
+             pst.setString(1, status);
+            pst.setString(2, limit);
             rs = pst.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String mail = rs.getString("email");
-                 Mail m = new Mail();
-                 m.setId(id);
+                Mail m = new Mail();
+                m.setId(id);
                 m.setEmail(mail);
                 mails.add(m);
             }
         } catch (Exception e) {
-            logger.error(e);
+            throw new Exception(e.getMessage());
         } finally {
             rs.close();
             pst.close();
             c.close();
         }
         return mails;
-        
-        
+
+    }
+    //tam thoi chi update status
+    public static void updateMail(Mail mail) throws SQLException, Exception {
+        Connection c = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            c = DBUtil.connectDB(Config.DB_NAME);
+
+            String query = "UPDATE  " + Mail.TABLE_NAME
+                    + " SET STATUS = ? WHERE ID= ?; ";
+            pst = c.prepareStatement(query);
+             pst.setInt(1, mail.getStatus());
+            pst.setInt(2, mail.getId());
+            pst.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            rs.close();
+            pst.close();
+            c.close();
+        }
+    
     }
 }

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * @author TUNGLV
  */
 public class Config {
+
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Config.class.getName());
     public static final String[] CONFIG_LOCATIONS_FILE = new String[]{"config.properties", "config.properties"};
     private static Properties props = null;
@@ -32,8 +33,10 @@ public class Config {
     //lay gia tri config trong file config.properties o day
     public static final String DB_NAME = get("db_name");
     public static final String USER_ACCESS_TOKEN = get("USER_ACCESS_TOKEN");
-     public static final String NUMBER_MAIL = get("number_mail");
-    
+    public static final String NUMBER_MAIL = get("number_mail");
+    public static final String STATUS_MAIL_SEND = get("status_mail_send");
+    public static final String STATUS_MAIL_UPDATE = get("status_mail_update");
+
     public static InputStream findResourceAsStream(String[] fileLocations) {
         for (String fl : fileLocations) {
             try {
