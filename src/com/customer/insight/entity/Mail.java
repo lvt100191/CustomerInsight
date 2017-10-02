@@ -15,7 +15,7 @@ import java.util.Date;
 public class Mail {
     public static final String TABLE_NAME = "TBL_MAIL";
     //id
-    String id;
+    int id;
     //dia chi email
     String email;
     //cua ai
@@ -34,13 +34,14 @@ public class Mail {
     //ngay insert vao csdl
     Date createDate;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
 
     public String getEmail() {
         return email;

@@ -55,39 +55,44 @@ public class FanPageAction {
                 if (comment.contains("@")) {
                     Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(comment);
                     while (m.find()) {
-                        try{
-                        mail = m.group();
-                        char end = mail.charAt(mail.length() - 1);
-                        if (end == '.') {
-                            mail = mail.substring(0, mail.length() - 1);
-                        }
-                        String from = "lazada.ohaythe@gmail.com";
-                        String pwd = "123456a@";
-                        String title = "Chuột quang không dây Forter V189 V111 + Tặng miếng lót chuột  ";
-                        String content = "CLICK ĐỂ XEM CHI TIẾT VÀ MUA HÀNG: http://bit.ly/2hyREyh " + "\n"
-                                + "Là sản phẩm cách tân vừa ra mắt năm 2014 hỗ trợ một cách hoàn hảo công việc văn phòng của bạn, chuột không dây Forter V189 có thiết kể trẻ trung, trang nhã và độ phân giải cao đến 1500dpi. Điểm nổi bật nhất của sản phẩm là khả năng tự động tắt, bật khi kết nối hoặc shutdown máy tính. Đây sẽ là người bạn hỗ trợ đắc lực cho mọi công việc trên máy tính của bạn. Tiếp nối những tính năng nổi trội của các sản phẩm trước, Forter V189 được cải tiến và nâng cấp đáp ứng nhu cầu làm việc với cường độ và áp lực cao.\n"
-                                + "\n"
-                                + "TÍNH NĂNG NỔI BẬT\n"
-                                + "Thiết kế Ergonomic, 3 phím chức năng\n"
-                                + "Nhờ vào thiết kế Ergonomic thông minh, chuột không dây Forter V189 tạo sự thoải mái cho cả người thuận tay phải lẫn tay trái. Sản phẩm được trang bị 3 phím chức năng cơ bản giúp người dùng dễ dàng thao tác, có cảm giác chắc chắn khi di chuyển chuột với cường độ nhanh.\n"
-                                + "\n"
-                                + "Độ phân giải 1500dpi, khoảng cách kết nối 15m\n"
-                                + "Sản phẩm có độ phân giải cao lên đến 1500dpi giúp bạn thao tác nhanh, nhạy trong phạm vi 15m. Vậy nên, dù phải di chuyển liên tục trong văn phòng, bạn vẫn có thể thực hiện công việc trên máy tính một cách nhanh chóng, chính xác.\n"
-                                + "\n"
-                                + "Tự động bật, tắt & tiết kiệm năng lượng\n"
-                                + "Với công nghệ tiên tiến, Forter V189 có khả năng tự động bật, tắt khi máy tính khởi động hoặc shutdown. Điều này giúp tiết kiệm năng lượng tối đa, cao hơn gấp 3 lần so với sản phẩm thông thường trên thị trường. Ngoài ra, sản phẩm được trang bị Pin 1AA Ultra Alkaline có tuổi thọ lên đến 24 tháng.\n"
-                                + "\n"
-                                + "THÔNG TIN SẢN PHẨM\n"
-                                + "Màu: đen\n"
-                                + "Trọng lượng (KG): 0.1\n"
-                                + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
-                                + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
-                        //EmailAction.sendEmail(from, pwd, mail, title, content);
-                        Mail email = new Mail();
-                        email.setEmail(mail);
-                        MailDao.insert(email);
-                        }catch(Exception e){
-                            
+                        try {
+                            mail = m.group();
+                            char end = mail.charAt(mail.length() - 1);
+                            if (end == '.') {
+                                mail = mail.substring(0, mail.length() - 1);
+                            }
+                            String from = "lazada.ohaythe@gmail.com";
+                            String pwd = "123456a@";
+                            String title = "Chuột quang không dây Forter V189 V111 + Tặng miếng lót chuột  ";
+                            String content = "CLICK ĐỂ XEM CHI TIẾT VÀ MUA HÀNG: http://bit.ly/2hyREyh " + "\n"
+                                    + "Là sản phẩm cách tân vừa ra mắt năm 2014 hỗ trợ một cách hoàn hảo công việc văn phòng của bạn, chuột không dây Forter V189 có thiết kể trẻ trung, trang nhã và độ phân giải cao đến 1500dpi. Điểm nổi bật nhất của sản phẩm là khả năng tự động tắt, bật khi kết nối hoặc shutdown máy tính. Đây sẽ là người bạn hỗ trợ đắc lực cho mọi công việc trên máy tính của bạn. Tiếp nối những tính năng nổi trội của các sản phẩm trước, Forter V189 được cải tiến và nâng cấp đáp ứng nhu cầu làm việc với cường độ và áp lực cao.\n"
+                                    + "\n"
+                                    + "TÍNH NĂNG NỔI BẬT\n"
+                                    + "Thiết kế Ergonomic, 3 phím chức năng\n"
+                                    + "Nhờ vào thiết kế Ergonomic thông minh, chuột không dây Forter V189 tạo sự thoải mái cho cả người thuận tay phải lẫn tay trái. Sản phẩm được trang bị 3 phím chức năng cơ bản giúp người dùng dễ dàng thao tác, có cảm giác chắc chắn khi di chuyển chuột với cường độ nhanh.\n"
+                                    + "\n"
+                                    + "Độ phân giải 1500dpi, khoảng cách kết nối 15m\n"
+                                    + "Sản phẩm có độ phân giải cao lên đến 1500dpi giúp bạn thao tác nhanh, nhạy trong phạm vi 15m. Vậy nên, dù phải di chuyển liên tục trong văn phòng, bạn vẫn có thể thực hiện công việc trên máy tính một cách nhanh chóng, chính xác.\n"
+                                    + "\n"
+                                    + "Tự động bật, tắt & tiết kiệm năng lượng\n"
+                                    + "Với công nghệ tiên tiến, Forter V189 có khả năng tự động bật, tắt khi máy tính khởi động hoặc shutdown. Điều này giúp tiết kiệm năng lượng tối đa, cao hơn gấp 3 lần so với sản phẩm thông thường trên thị trường. Ngoài ra, sản phẩm được trang bị Pin 1AA Ultra Alkaline có tuổi thọ lên đến 24 tháng.\n"
+                                    + "\n"
+                                    + "THÔNG TIN SẢN PHẨM\n"
+                                    + "Màu: đen\n"
+                                    + "Trọng lượng (KG): 0.1\n"
+                                    + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
+                                    + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
+                            //gui mail
+                            //EmailAction.sendEmail(from, pwd, mail, title, content);
+                            Mail email = new Mail();
+                            email.setEmail(mail);
+                            //select  count (*), email  from TBL_MAIL   group by email having count(*)>1 ;
+                            if (!EmailAction.checkMailExisted(mail)) {
+                                MailDao.insert(email);
+                            }
+
+                        } catch (Exception e) {
+
                         }
                     }
                 }
@@ -162,7 +167,7 @@ public class FanPageAction {
         JSONObject objComments = (JSONObject) parser.parse(rsComment);
         JSONArray dataComments = (JSONArray) objComments.get("data");
         List<Comment> lst = new ArrayList<Comment>();
-        if (dataComments!=null && dataComments.size() > 0) {
+        if (dataComments != null && dataComments.size() > 0) {
             for (int j = 0; j < dataComments.size(); j++) {
                 Comment c = new Comment();
                 //chu y dataComments get j khong duoc nham bien

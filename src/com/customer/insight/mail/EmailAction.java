@@ -5,6 +5,9 @@
  */
 package com.customer.insight.mail;
 
+import com.customer.insight.db.MailDao;
+import com.customer.insight.entity.Mail;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -102,5 +105,15 @@ public class EmailAction {
     //lay danh sach mail trong DB: TBL_MAIL
     private static ArrayList<String> getListMail() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    //kiem tra tai khoan mail da ton tai chua
+    //fasle:chua ton tai true:da ton tai
+    public static boolean checkMailExisted(String mail) throws SQLException{
+        boolean check= false;
+        Mail m = MailDao.getByEmail(mail);
+        if(m != null){
+            return true;
+        }
+        return check;
     }
 }
