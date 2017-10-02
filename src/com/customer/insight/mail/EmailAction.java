@@ -28,7 +28,9 @@ import javax.mail.internet.MimeMessage;
 public class EmailAction {
 
     public static void main(String[] args) throws SQLException, Exception {
-        String from = "lazada.ohaythe@gmail.com";
+        //String from = "lazada.ohaythe@gmail.com";
+        //String pwd = "123456a@";
+        String from = "m1.sonlv95@gmail.com";
         String pwd = "123456a@";
         String title = "Combo 3 Quần lót nam xuất Nhật viền màu cotton cao cấp Chikoko";
         String content = "Với phương châm Không chỉ đem đến cho khách hàng những sản phẩm mang phong cách và kiểu dáng độc đáo mà còn giới thiệu đến khách hàng những sản phẩm đạt chất lượng tốt nhất.Các mẫu thiết kế được kiểm duyệt kĩ càng từ khâu chọn chất liệu ,dựng mẫu và hoàn thiện. "
