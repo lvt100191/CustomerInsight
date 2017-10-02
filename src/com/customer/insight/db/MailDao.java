@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import org.apache.log4j.Logger;
 
@@ -87,5 +88,38 @@ public class MailDao {
         }
         return m;
 
+    }
+    public static ArrayList<Mail> getListMail(String limit) throws SQLException{
+        ArrayList<Mail> mails = new ArrayList<>();
+                Connection c = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            c = DBUtil.connectDB(Config.DB_NAME);
+
+            String query = "SELECT * FROM  " + Mail.TABLE_NAME
+                    + " LIMIT ?; ";
+            pst = c.prepareStatement(query);
+            pst.setString(1, limit);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String mail = rs.getString("email");
+                 Mail m = new Mail();
+                 m.setId(id);
+                m.setEmail(mail);
+                mails.add(m);
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            rs.close();
+            pst.close();
+            c.close();
+        }
+        return mails;
+        
+        
     }
 }

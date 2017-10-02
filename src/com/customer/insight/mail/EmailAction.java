@@ -5,6 +5,7 @@
  */
 package com.customer.insight.mail;
 
+import com.customer.insight.config.Config;
 import com.customer.insight.db.MailDao;
 import com.customer.insight.entity.Mail;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailAction {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         String from = "lazada.ohaythe@gmail.com";
         String pwd = "123456a@";
         String title = "Chuột quang không dây Forter V189 V111 + Tặng miếng lót chuột  ";
@@ -48,10 +49,10 @@ public class EmailAction {
                 + "Trọng lượng (KG): 0.1\n"
                 + "Kích thước sản phẩm (D x R x C cm): 10x3x2\n"
                 + "Bảo hành: 24 tháng- Theo đúng tiêu chuẩn của Nhà sản xuất";
-        ArrayList<String> lst = getListMail();
-        for (String to : lst) {
+        ArrayList<Mail> lst = getListMail();
+        for (Mail to : lst) {
             try {
-                sendEmail(from, pwd, to, title, content);
+                sendEmail(from, pwd, to.getEmail(), title, content);
                 System.out.println("tunglv gui toi mail" + to + " thanh cong");
             } catch (Exception e) {
                 System.out.println("tunglv gui toi mail: " + to + " bi loi" + e.getMessage());
@@ -102,16 +103,24 @@ public class EmailAction {
             throw new MessagingException(e.getMessage());
         }
     }
-    //lay danh sach mail trong DB: TBL_MAIL
-    private static ArrayList<String> getListMail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    //lay danh sach mail trong DB: TBL_MAIL 
+    //(gioi han so luong ban ghi lay ve theo cau hinh NUMBER_MAIL)
+    //select  *   from TBL_MAIL   limit 5 ;
+    private static ArrayList<Mail> getListMail() throws SQLException {
+        ArrayList<Mail> lstMail = null;
+        String numMail = Config.NUMBER_MAIL;
+       lstMail = MailDao.getListMail(numMail);
+        return lstMail;
+
     }
+
     //kiem tra tai khoan mail da ton tai chua
     //fasle:chua ton tai true:da ton tai
-    public static boolean checkMailExisted(String mail) throws SQLException{
-        boolean check= false;
+    public static boolean checkMailExisted(String mail) throws SQLException {
+        boolean check = false;
         Mail m = MailDao.getByEmail(mail);
-        if(m != null){
+        if (m != null) {
             return true;
         }
         return check;
