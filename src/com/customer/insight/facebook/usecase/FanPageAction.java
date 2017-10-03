@@ -46,8 +46,8 @@ public class FanPageAction {
         usernameLst.add("toeicfighters");
         usernameLst.add("TOEICAcademy");
         usernameLst.add("ToeicThayLong");
-          usernameLst.add("OnThiTOEIC.vn");
-          usernameLst.add("ngoaingu24h");
+        usernameLst.add("OnThiTOEIC.vn");
+        usernameLst.add("ngoaingu24h");
 
         for (String username : usernameLst) {
 

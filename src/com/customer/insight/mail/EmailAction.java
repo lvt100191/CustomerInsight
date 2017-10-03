@@ -28,15 +28,15 @@ import javax.mail.internet.MimeMessage;
 public class EmailAction {
 
     public static void main(String[] args) throws SQLException, Exception {
-        //String from = "lazada.ohaythe@gmail.com";
-        //String pwd = "123456a@";
-        //String from = "m1.sonlv95@gmail.com";
-        //String pwd = "123456a@";
-        String from = "m2.sonlv95@gmail.com";
+        String from = "lazada.ohaythe@gmail.com";
         String pwd = "123456a@";
+//        String from = "m1.sonlv95@gmail.com";
+//        String pwd = "123456a@";
+//        String from = "m2.sonlv95@gmail.com";
+//        String pwd = "123456a@";
         String title = "Combo 3 Quần lót nam xuất Nhật viền màu cotton cao cấp Chikoko";
         String content = "Với phương châm Không chỉ đem đến cho khách hàng những sản phẩm mang phong cách và kiểu dáng độc đáo mà còn giới thiệu đến khách hàng những sản phẩm đạt chất lượng tốt nhất.Các mẫu thiết kế được kiểm duyệt kĩ càng từ khâu chọn chất liệu ,dựng mẫu và hoàn thiện. "
-                + "Khách hàng xem thêm sản phẩm tại link: http://bit.ly/2xNNHgO \n" +
+                + "Khách hàng xem thêm sản phẩm tại link: http://ho.lazada.vn/SHUrKd \n" +
 "\n" +
 "Phiên bản quần Nhật cao cấp nhất,chất mềm nhất,co dãn và thấm hút mồ hôi tốt nhất. Chất liệu mềm mịn, thoáng mát, thấm hút mồ hôi, ôm khít body nhưng vẫn thoải mái.";
 
@@ -53,6 +53,9 @@ public class EmailAction {
                 MailDao.updateMail(to);
             } catch (Exception e) {
                 System.out.println("tunglv gui toi mail: " + to + " bi loi" + e.getMessage());
+                if(e.getMessage().contains("550 5.4.5 Daily user sending quota exceeded")){
+                   throw new Exception("Email da gui qua so luong cho phep trong ngay");
+                }
             }
         }
     }
