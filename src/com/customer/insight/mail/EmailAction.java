@@ -26,20 +26,26 @@ import javax.mail.internet.MimeMessage;
  * @author TUNGLV
  */
 public class EmailAction {
-
+    //truoc khi gui mail đăng nhập vào mail gửi chèn chữ ký là ảnh của sản phẩm
     public static void main(String[] args) throws SQLException, Exception {
-        String from = "lazada.ohaythe@gmail.com";
-        String pwd = "123456a@";
-//        String from = "m1.sonlv95@gmail.com";
+//        String from = "lazada.ohaythe@gmail.com";
 //        String pwd = "123456a@";
+        String from = "m1.sonlv95@gmail.com";
+        String pwd = "123456a@";
 //        String from = "m2.sonlv95@gmail.com";
 //        String pwd = "123456a@";
-        String title = "Combo 3 Quần lót nam xuất Nhật viền màu cotton cao cấp Chikoko";
-        String content = "Với phương châm Không chỉ đem đến cho khách hàng những sản phẩm mang phong cách và kiểu dáng độc đáo mà còn giới thiệu đến khách hàng những sản phẩm đạt chất lượng tốt nhất.Các mẫu thiết kế được kiểm duyệt kĩ càng từ khâu chọn chất liệu ,dựng mẫu và hoàn thiện. "
-                + "Khách hàng xem thêm sản phẩm tại link: http://ho.lazada.vn/SHUrKd \n" +
-"\n" +
-"Phiên bản quần Nhật cao cấp nhất,chất mềm nhất,co dãn và thấm hút mồ hôi tốt nhất. Chất liệu mềm mịn, thoáng mát, thấm hút mồ hôi, ôm khít body nhưng vẫn thoải mái.";
-
+        String title = "Mũ bảo hiểm 1/2 đen + kính phi công + kính chống tia uv (Đen)";
+        String content = "Mũ bảo hiểm là 1 trong những phụ kiện rất cần thiết cho tất cả những người lái nói chung và cho các rider scooterist nói riêng . Không chỉ là thứ bảo vệ an toàn cho người lái xe mà nó còn là 1 phong cách , thể hiện cái \" gu \" của mỗi người cũng như chiếc xe mà bạn đang sở hữu !\n"
+                + "\n"
+                + "Chúng Tôi nghĩ rằng ko dưới 1 lần các bạn đã từng lưỡng lự trước cửa hàng mũ với vô vàn chủng loại khác nhau và băn khoăn ko biết chọn cái nào cho đúng sở thích và hợp \"gu\" của mình , vì thế chúng tôi mạo muội giới thiệu với các bạn 1 loại mũ bảo hiểm rất được ưa chuộng từ những năm 50,60 của thập kỉ trước cho đến tận bây giờ đấy là loại mũ 3/4 đầu , hở cằm với mái che đơn giản mà thường được gọi là \" Classic Retro Helmet \" (CRH)"
+                + "\n"
+                + "CLICK NGAY VÀ LUÔN NẾU BẠN ĐANG CẦN MUA MỘT SẢN PHẨM VỪA RẺ LẠI VỪA CHẤT NHƯ VẬY TẠI LINK:"
+                + "\n"
+                + " http://bit.ly/2yHELJ7"
+                + "\n"
+                + " Sâu kiu"
+                + "\n"
+                + "https://www.facebook.com/khuyenmai.sale.lazada/";
         String numMail = Config.NUMBER_MAIL;
         String status = Config.STATUS_MAIL_SEND;
         String statusUpdate = Config.STATUS_MAIL_UPDATE;
@@ -53,8 +59,8 @@ public class EmailAction {
                 MailDao.updateMail(to);
             } catch (Exception e) {
                 System.out.println("tunglv gui toi mail: " + to + " bi loi" + e.getMessage());
-                if(e.getMessage() !=null && e.getMessage() !="" && e.getMessage().contains("550 5.4.5 Daily user sending quota exceeded")){
-                   throw new Exception("Email da gui qua so luong cho phep trong ngay");
+                if (e.getMessage() != null && e.getMessage() != "" && e.getMessage().contains("550 5.4.5 Daily user sending quota exceeded")) {
+                    throw new Exception("Email da gui qua so luong cho phep trong ngay");
                 }
             }
         }
