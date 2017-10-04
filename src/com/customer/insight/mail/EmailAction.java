@@ -53,7 +53,7 @@ public class EmailAction {
                 MailDao.updateMail(to);
             } catch (Exception e) {
                 System.out.println("tunglv gui toi mail: " + to + " bi loi" + e.getMessage());
-                if(e.getMessage().contains("550 5.4.5 Daily user sending quota exceeded")){
+                if(e.getMessage() !=null && e.getMessage() !="" && e.getMessage().contains("550 5.4.5 Daily user sending quota exceeded")){
                    throw new Exception("Email da gui qua so luong cho phep trong ngay");
                 }
             }

@@ -32,7 +32,7 @@ public class UserAction {
         String token = cfg.USER_ACCESS_TOKEN;
         UserAction getUser = new UserAction();
         User u = getUser.getUserByToken(token);
-    
+
     }
 
     //lay user theo token
@@ -55,18 +55,20 @@ public class UserAction {
     }
 
     /**
-     * desc: Lay thong tin fanpage user da like va import vao db
+     * desc: Lay thong tin user da like
      *
      * @param token: ma truy cap nguoi dung
-     * @param id: id cua nguoi dung can lay thong tin so luong trang ng dung do da like
+     * @param id: id cua nguoi dung can lay thong tin so luong trang ng dung do
+     * da like
      * @return
      * @throws Exception
      */
-    public void getPageUserLikes(String token,String id, String groupCode) throws Exception {
+    public void getPageUserLikes(String token, String id) throws Exception {
         try {
             String rsJsonPageUserLikes = null;
-            String urlPageUserLikes = "https://graph.facebook.com/"+id+"?access_token=" + token+ "&fields=likes";
+            String urlPageUserLikes = "https://graph.facebook.com/" + id + "/likes?access_token=" + token;
             rsJsonPageUserLikes = ResponseUtil.sendGet(urlPageUserLikes);
+            System.out.println("thuc hien thanh cong");
         } catch (Exception e) {
             throw new Exception("getPageUserLikes error: " + e.getMessage());
         }

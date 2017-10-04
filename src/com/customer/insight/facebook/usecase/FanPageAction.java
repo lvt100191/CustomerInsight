@@ -55,7 +55,7 @@ public class FanPageAction {
             Page page = fanPage.getPageInfo(token, username);
             //lay danh sach bai da dang tu ngay truyen vao den hien tai
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fromDate = sdf.parse("2017-10-02");
+            Date fromDate = sdf.parse("2017-10-04");
             ArrayList<Feed> lstFeed = fanPage.getFeed(token, page.getId(), fromDate);
             //lay danh sach binh luan theo bai dang
             String mail = null;
