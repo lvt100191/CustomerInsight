@@ -8,16 +8,6 @@ package com.customer.insight.facebook.usecase;
 import com.customer.insight.config.Config;
 import com.customer.insight.facebook.dto.User;
 import com.customer.insight.http.ResponseUtil;
-import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Parameter;
-import com.restfb.Version;
-import com.restfb.types.Conversation;
-import com.restfb.types.Message;
-import com.restfb.types.send.IdMessageRecipient;
-import com.restfb.types.send.SendResponse;
-import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
