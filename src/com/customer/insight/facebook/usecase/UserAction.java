@@ -17,19 +17,6 @@ import org.json.simple.parser.JSONParser;
  */
 public class UserAction {
 
-    public static void main(String[] args) throws Exception {
-        Config cfg = new Config();
-        String token = cfg.USER_ACCESS_TOKEN;
-        UserAction userAction = new UserAction();
-        //lay thong tin user
-        User u = userAction.getUserByToken(token);
-        //post bai le trang ca nhan
-//        String msg="hello";
-//        userAction.postFeed(token,u.getId(),msg);
-         System.out.println("=========================thuc hien thanh cong");
-
-    }
-
     //lay user theo token
     public User getUserByToken(String token) throws Exception {
         User user = new User();
@@ -68,18 +55,30 @@ public class UserAction {
             throw new Exception("getPageUserLikes error: " + e.getMessage());
         }
     }
+
     //post bai len trang ca nhan
     //token: ma truy nhap cua user developer
     //userID: id cua user
     //msg: noi dung bai post len trang
     public void postFeed(String token, String userID, String msg) throws Exception {
         try {
- String urlPostFeed = "https://graph.facebook.com/v2.10/" + userID + "/feed?message=" + msg + "&access_token=" + token;
-        ResponseUtil responseUtil = new ResponseUtil();
-        responseUtil.sendPost(urlPostFeed);
+            String urlPostFeed = "https://graph.facebook.com/v2.10/" + userID + "/feed?message=" + msg + "&access_token=" + token;
+            ResponseUtil responseUtil = new ResponseUtil();
+            responseUtil.sendPost(urlPostFeed);
         } catch (Exception e) {
             throw new Exception("getPageUserLikes error: " + e.getMessage());
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Config cfg = new Config();
+        String token = cfg.USER_ACCESS_TOKEN;
+        UserAction userAction = new UserAction();
+        //lay thong tin user
+        User u = userAction.getUserByToken(token);
+  
+        System.out.println("=========================thuc hien thanh cong");
+
     }
 
 }

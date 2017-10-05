@@ -33,13 +33,9 @@ import javax.mail.internet.MimeMultipart;
  */
 public class EmailAction {
 
+    //truong hop gui den nhieu email va update bang tbl_mail
     //truoc khi gui mail len trang https://wordtohtml.net/ soan html online để trình bày sau đó paste noi dung vao content
     //thay hinh  anh img trong package images
-    public static void main(String[] args) throws SQLException, Exception {
-        sendMultiEmail();
-    }
-
-    //truong hop gui den nhieu email va update bang tbl_mail
     public static void sendMultiEmail() throws Exception {
         String from = "lazada.ohaythe@gmail.com";
         String pwd = "123456a@";
@@ -178,6 +174,10 @@ public class EmailAction {
         return result;
 
     }
+
     //com.sun.mail.smtp.SMTPSendFailedException: 550 5.4.5 Daily user sending quota exceeded. r12sm16585631pfd.187 - gsmtp
     //desc: loi mot ngay gui vuot qua so luong mail cho phep
+    public static void main(String[] args) throws SQLException, Exception {
+        sendMultiEmail();
+    }
 }

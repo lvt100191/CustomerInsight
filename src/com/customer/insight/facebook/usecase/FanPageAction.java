@@ -34,22 +34,6 @@ import org.json.simple.parser.JSONParser;
 //vao trang do ta co thong tin username nhu sau @Torano.vn -> username='Torano.vn'
 public class FanPageAction {
 
-    public static void main(String[] args) throws Exception {
-       
-        FanPageAction fanPage = new FanPageAction();
-        Config cfg = new Config();
-        String token = cfg.USER_ACCESS_TOKEN;
-        
-        //post bai len trang, chu y trang phai cho phep post bai
-//        Page p= fanPage.getPageInfo(token, "mshoatoeic");
-//        String msg="hello";
-//        fanPage.postToPage(p.getId(), token, msg);
-        //lay thong tin email trong binh luan bai dang cua trang insert vao db
-        //fanPage.getEmailInComments(token);
-        
-        System.out.println("thuc hien thanh cong");
-    }
-
     //lay thong tin trang theo username
     public Page getPageInfo(String token, String username) throws Exception {
         Page page = new Page();
@@ -140,20 +124,22 @@ public class FanPageAction {
         }
         return listComment;
     }
-    
+
     //post bai len facebook
     //idPage: id cua trang can dang
     //token: cua user deverloper - ma truy cap nguoi dung
     //msg : noi dung bai dang
-    public static void postToPage(String idPage, String token, String msg) throws Exception{
-        String url="https://graph.facebook.com/v2.10/"+idPage+"/feed?message="+msg+"&access_token="+token;
-        ResponseUtil responseUtil= new ResponseUtil();
-         String rsComment = responseUtil.sendPost(url);
+    public static void postToPage(String idPage, String token, String msg) throws Exception {
+        String url = "https://graph.facebook.com/v2.10/" + idPage + "/feed?message=" + msg + "&access_token=" + token;
+        ResponseUtil responseUtil = new ResponseUtil();
+        String rsComment = responseUtil.sendPost(url);
     }
-    
+
     //lay thong tin email co trong binh luan cua bai dang insert vao db: TBL_MAIL
     //token: token cua user deverloper
-    public void getEmailInComments(String token) throws ParseException, Exception{
+    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    //Date fromDate = sdf.parse("2017-10-05");
+    public void getEmailInComments(String token, Date fromDate) throws ParseException, Exception {
         //tai khoan nguoi dung tren trang
         ArrayList<String> usernameLst = new ArrayList<>();
         usernameLst.add("mshoatoeic");
@@ -169,11 +155,8 @@ public class FanPageAction {
         for (String username : usernameLst) {
 
             //lay thong tin trang
-            
             Page page = fanPage.getPageInfo(token, username);
-            //lay danh sach bai da dang tu ngay truyen vao den hien tai
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fromDate = sdf.parse("2017-10-05");
+            //lay danh sach bai da dang tu ngay fromDate truyen vao den hien tai
             ArrayList<Feed> lstFeed = fanPage.getFeed(token, page.getId(), fromDate);
             //lay danh sach binh luan theo bai dang
             String mail = null;
@@ -207,5 +190,20 @@ public class FanPageAction {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        FanPageAction fanPage = new FanPageAction();
+        Config cfg = new Config();
+        String token = cfg.USER_ACCESS_TOKEN;
+        
+        //lay thong tin email tu binh luan insert vao DB
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fromDate = sdf.parse("2017-10-05");
+        fanPage.getEmailInComments(token, fromDate);
+        
+        
+
+        System.out.println("thuc hien thanh cong");
     }
 }

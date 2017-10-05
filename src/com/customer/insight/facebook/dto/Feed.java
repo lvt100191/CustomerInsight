@@ -7,17 +7,24 @@ package com.customer.insight.facebook.dto;
 
 /**
  *
- * @author TUNGLV
- * Feed: Bai Post tren trang ca nhan hoac fanpage, group
+ * @author TUNGLV Feed: Bai Post tren trang ca nhan hoac fanpage, group
  */
 public class Feed {
+
     private String id;
     private String createTime;
     private String message;
     private String story;
+    private String updateTime;
 
+    public String getUpdateTime() {
+        return updateTime;
+    }
 
-    
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
     public String getId() {
         return id;
     }
@@ -25,7 +32,6 @@ public class Feed {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getCreateTime() {
         return createTime;
@@ -50,6 +56,5 @@ public class Feed {
     public void setStory(String story) {
         this.story = story;
     }
- 
-    
+
 }
