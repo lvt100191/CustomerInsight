@@ -34,61 +34,63 @@ import org.json.simple.parser.JSONParser;
 public class FanPageAction {
 
     public static void main(String[] args) throws Exception {
+       
         FanPageAction fanPage = new FanPageAction();
         Config cfg = new Config();
         String token = cfg.USER_ACCESS_TOKEN;
-        //tai khoan nguoi dung tren trang
-        ArrayList<String> usernameLst = new ArrayList<>();
-        usernameLst.add("mshoatoeic");
-        usernameLst.add("Elight.LearningEnglish");
-        usernameLst.add("anhleluyenthiTOEIC");
-        usernameLst.add("smart.learning.hcm");
-        usernameLst.add("toeicfighters");
-        usernameLst.add("TOEICAcademy");
-        usernameLst.add("ToeicThayLong");
-        usernameLst.add("OnThiTOEIC.vn");
-        usernameLst.add("ngoaingu24h");
-
-        for (String username : usernameLst) {
-
-            //lay thong tin trang
-            Page page = fanPage.getPageInfo(token, username);
-            //lay danh sach bai da dang tu ngay truyen vao den hien tai
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fromDate = sdf.parse("2017-10-04");
-            ArrayList<Feed> lstFeed = fanPage.getFeed(token, page.getId(), fromDate);
-            //lay danh sach binh luan theo bai dang
-            String mail = null;
-            for (Feed f : lstFeed) {
-                ArrayList<Comment> comments = fanPage.getComments(token, f.getId());
-                for (Comment c : comments) {
-                    //neu co email thi gui mail
-                    String comment = c.getContentComment();
-                    if (comment.contains("@")) {
-                        Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(comment);
-                        while (m.find()) {
-                            try {
-                                mail = m.group();
-                                char end = mail.charAt(mail.length() - 1);
-                                if (end == '.') {
-                                    mail = mail.substring(0, mail.length() - 1);
-                                }
-                                Mail email = new Mail();
-                                email.setEmail(mail);
-                                //select  count (*), email  from TBL_MAIL   group by email having count(*)>1 ;
-                                if (!EmailAction.checkMailExisted(mail)) {
-                                    MailDao.insert(email);
-                                }
-
-                            } catch (Exception e) {
-
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
+                 fanPage.postToPage("275158636317806",token);
+//        //tai khoan nguoi dung tren trang
+//        ArrayList<String> usernameLst = new ArrayList<>();
+//        usernameLst.add("mshoatoeic");
+//        usernameLst.add("Elight.LearningEnglish");
+//        usernameLst.add("anhleluyenthiTOEIC");
+//        usernameLst.add("smart.learning.hcm");
+//        usernameLst.add("toeicfighters");
+//        usernameLst.add("TOEICAcademy");
+//        usernameLst.add("ToeicThayLong");
+//        usernameLst.add("OnThiTOEIC.vn");
+//        usernameLst.add("ngoaingu24h");
+//
+//        for (String username : usernameLst) {
+//
+//            //lay thong tin trang
+//            Page page = fanPage.getPageInfo(token, username);
+//            //lay danh sach bai da dang tu ngay truyen vao den hien tai
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            Date fromDate = sdf.parse("2017-10-04");
+//            ArrayList<Feed> lstFeed = fanPage.getFeed(token, page.getId(), fromDate);
+//            //lay danh sach binh luan theo bai dang
+//            String mail = null;
+//            for (Feed f : lstFeed) {
+//                ArrayList<Comment> comments = fanPage.getComments(token, f.getId());
+//                for (Comment c : comments) {
+//                    //neu co email thi gui mail
+//                    String comment = c.getContentComment();
+//                    if (comment.contains("@")) {
+//                        Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(comment);
+//                        while (m.find()) {
+//                            try {
+//                                mail = m.group();
+//                                char end = mail.charAt(mail.length() - 1);
+//                                if (end == '.') {
+//                                    mail = mail.substring(0, mail.length() - 1);
+//                                }
+//                                Mail email = new Mail();
+//                                email.setEmail(mail);
+//                                //select  count (*), email  from TBL_MAIL   group by email having count(*)>1 ;
+//                                if (!EmailAction.checkMailExisted(mail)) {
+//                                    MailDao.insert(email);
+//                                }
+//
+//                            } catch (Exception e) {
+//
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            }
+//        }
         System.out.println("thuc hien thanh cong");
     }
 
@@ -181,5 +183,12 @@ public class FanPageAction {
             }
         }
         return listComment;
+    }
+    
+    //post bai len facebook
+    public static void postToPage(String idPage, String token) throws Exception{
+        String url="https://graph.facebook.com/"+idPage+"/feed?access_token="+token+"&message=Hello_fans";
+        ResponseUtil responseUtil= new ResponseUtil();
+         String rsComment = responseUtil.sendPost(url);
     }
 }
